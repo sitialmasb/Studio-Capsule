@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Dancing+Script&family=Courier+Prime&family=Playfair+Display:ital@0;1&display=swap');
+
+body {
+    font-family: 'Inter', sans-serif;
+    touch-action: manipulation;
+    overscroll-behavior: none;
+}
+
+.mirror { transform: scaleX(-1); }
+
+.layout-card {
+    @apply bg-white p-6 rounded-lg shadow-sm border-[1px] border-transparent cursor-pointer hover:border-[#333331] hover:shadow-md transition-all text-center;
+}
+
+.layout-card p {
+    @apply mt-5 font-bold text-[9px] tracking-[0.2em] text-[#333331];
+}
+
+.sticker-opt {
+    @apply text-2xl grayscale hover:grayscale-0 hover:scale-125 transition-all active:scale-90;
+}
+
+#result-canvas {
+    max-height: 85vh;
+    max-width: 100%;
+    cursor: move;
+    touch-action: none;
+}
+
+input[type="checkbox"] {
+    width: 30px; height: 16px;
+    appearance: none;
+    background: #D1D1CB;
+    border-radius: 20px;
+    position: relative;
+    cursor: pointer;
+}
+input[type="checkbox"]:checked { background: #333331; }
+input[type="checkbox"]::before {
+    content: ''; position: absolute;
+    width: 12px; height: 12px;
+    background: white; border-radius: 50%;
+    top: 2px; left: 2px; transition: 0.2s;
+}
+input[type="checkbox"]:checked::before { left: 16px; }
+
+select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.5rem center;
+    background-size: 1em;
+}
