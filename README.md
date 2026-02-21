@@ -19,16 +19,6 @@ Users can capture multiple poses, customize their photostrip with text and stick
 
 ---
 
-## 🛠 Tech Stack
-
-* HTML5
-* Tailwind CSS
-* JavaScript
-* Canvas API
-* Web Media API (`getUserMedia`)
-
----
-
 ## 🚀 How It Works
 
 1. Select layout
