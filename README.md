@@ -1,59 +1,42 @@
-# 📸 Studio Capsule | Digital Photobooth
-Studio Capsule is a minimalist, self-portrait digital experience inspired by modern Korean photobooth aesthetics. This web-based application allows users to capture multiple poses, arrange them into professional layouts, and customize the final result with ornaments and custom typography.
+# 📸 STUDIO CAPSULE | Digital Photobooth
 
-✨ Features
-Custom Layouts: Choose from 1, 2, 3, or 4-frame vertical strips.
+A minimalist web-based digital photobooth built with **HTML, Tailwind CSS, and Vanilla JavaScript**.
 
-Live Capture: Real-time camera feed with a built-in countdown timer (3-2-1).
+Users can capture multiple poses, customize their photostrip with text and stickers, and download the final image.
 
-Mirror Mode: Toggle between mirrored and standard views for the perfect selfie.
+---
 
-Pose Review: Instant preview of each capture with a "Retake" option for specific frames.
+## ✨ Features
 
-Creative Studio:
+* Choose 1–4 frame layouts
+* Live camera preview with 3-second countdown
+* Mirror mode toggle
+* Retake individual frames
+* Add custom text (multiple font styles)
+* Add draggable emoji stickers
+* Download final photostrip as PNG
+* Mobile-friendly with touch support
 
-Ornaments: Add emojis and stickers to your photos.
+---
 
-Custom Typography: Add personalized text with Serif or Sans-Serif font options.
+## 🛠 Tech Stack
 
-Interactive Editing: All stickers and text elements are fully draggable with touch and mouse support.
+* HTML5
+* Tailwind CSS
+* JavaScript
+* Canvas API
+* Web Media API (`getUserMedia`)
 
-High-Quality Export: Download your final composite as a high-resolution PNG.
+---
 
-🚀 Tech Stack
-Frontend: HTML5, CSS3, JavaScript (ES6+).
+## 🚀 How It Works
 
-Styling: Tailwind CSS for a responsive, utility-first design.
+1. Select layout
+2. Capture poses
+3. Edit with text & stickers
+4. Download your photostrip
 
-Imaging: HTML5 Canvas API for real-time image compositing and manipulation.
+---
 
-Icons/Fonts: Google Fonts (Inter) and System Emojis.
-
-🛠️ Installation & Usage
-Since this is a client-side application, no heavy backend installation is required.
-
-Clone the repository:
-
-Bash
-git clone https://github.com/yourusername/studio-capsule.git
-Navigate to the folder:
-
-Bash
-cd studio-capsule
-Run the app:
-Simply open index.html in any modern web browser.
-Note: Camera access requires a secure context (HTTPS or localhost).
-
-🎨 Design Philosophy
-Studio Capsule follows a "Warm Minimalist" aesthetic:
-
-Background: #F4F4F2 (Soft Bone)
-
-Text: #333331 (Charcoal)
-
-Accents: #888880 (Muted Grey)
-
-Typography: Clean, uppercase tracking with a focus on whitespace and "Archive" style vibes.
-
-📱 Mobile Support
-The application is fully responsive and optimized for mobile devices. It includes specific touch-event listeners to ensure the "Drag & Drop" editing experience is smooth on iOS and Android browsers.
+Developed by **Siti Almas Bahirah**
+Software Engineering Student ✨
