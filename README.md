@@ -1,4 +1,4 @@
-#📸 Studio Capsule | Digital Photobooth
+# 📸 Studio Capsule | Digital Photobooth
 Studio Capsule is a minimalist, self-portrait digital experience inspired by modern Korean photobooth aesthetics. This web-based application allows users to capture multiple poses, arrange them into professional layouts, and customize the final result with ornaments and custom typography.
 
 ✨ Features
