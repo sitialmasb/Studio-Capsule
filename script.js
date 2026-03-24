@@ -7,21 +7,32 @@ const nextBtn = document.getElementById('next-to-edit');
 
 let currentLayout = 1;
 let capturedImages = [];
-let stickers = []; // Array to store both emojis and text objects
+let stickers = []; 
 let isDragging = false;
 let selectedStickerIndex = null;
 
+// FUNGSI NAVIGASI
 function showPage(id) {
-    document.querySelectorAll('section').forEach(s => s.classList.add('hidden'));
-    document.getElementById(id).classList.remove('hidden');
+    document.querySelectorAll('section').forEach(s => {
+        s.classList.add('hidden');
+        s.style.display = 'none';
+    });
+    const target = document.getElementById(id);
+    if (target) {
+        target.classList.remove('hidden');
+        target.style.display = 'flex';
+    }
 }
 
 function goBack(n) { showPage('page-' + n); }
 
+// INISIALISASI SLOT FOTO
 function initPoseSlots() {
     poseSlotsContainer.innerHTML = '';
     capturedImages = new Array(currentLayout).fill(null);
     nextBtn.classList.add('hidden');
+    nextBtn.style.display = 'none';
+
     for (let i = 0; i < currentLayout; i++) {
         const slot = document.createElement('div');
         slot.className = "relative aspect-[3/2] bg-[#F4F4F2] rounded border-[1px] border-[#D1D1CB] overflow-hidden";
@@ -45,16 +56,19 @@ async function selectLayout(n) {
 
 function toggleMirror() { video.classList.toggle('mirror'); }
 
+// LOGIKA CAPTURE
 document.getElementById('capture-btn').onclick = async () => {
     const emptyIdx = capturedImages.findIndex(img => img === null);
     if (emptyIdx === -1) return;
 
     countdownEl.classList.remove('hidden');
+    countdownEl.style.display = 'flex';
     for (let i = 3; i > 0; i--) {
         countdownEl.innerText = i;
         await new Promise(r => setTimeout(r, 1000));
     }
     countdownEl.classList.add('hidden');
+    countdownEl.style.display = 'none';
 
     const tempCanvas = document.createElement('canvas');
     tempCanvas.width = 1200; tempCanvas.height = 800;
@@ -78,9 +92,16 @@ document.getElementById('capture-btn').onclick = async () => {
 
 function updateSlotUI(idx) {
     const slot = document.getElementById(`slot-${idx}`);
-    slot.innerHTML = `<img src="${capturedImages[idx]}" class="w-full h-full object-cover">
-                      <button onclick="retake(${idx})" class="absolute top-1 right-1 bg-black text-white px-2 py-1 rounded text-[7px] font-bold tracking-tighter uppercase">Retake</button>`;
-    if (capturedImages.every(img => img !== null)) nextBtn.classList.remove('hidden');
+    slot.innerHTML = `
+        <img src="${capturedImages[idx]}" class="w-full h-full object-cover">
+        <button onclick="retake(${idx})" class="absolute top-1 right-1 bg-black text-white px-2 py-1 rounded text-[7px] font-bold tracking-tighter uppercase z-10">Retake</button>
+    `;
+
+    const isAllFilled = capturedImages.every(img => img !== null);
+    if (isAllFilled) {
+        nextBtn.classList.remove('hidden');
+        nextBtn.style.display = 'block';
+    }
 }
 
 function retake(idx) {
@@ -88,12 +109,14 @@ function retake(idx) {
     const slot = document.getElementById(`slot-${idx}`);
     slot.innerHTML = `<p class="absolute inset-0 flex items-center justify-center text-[8px] text-[#A7A399] tracking-widest uppercase">Pose ${idx+1}</p>`;
     nextBtn.classList.add('hidden');
+    nextBtn.style.display = 'none';
 }
 
-nextBtn.onclick = () => {
+// LOGIKA TOMBOL PROCEED TO EDIT (PERBAIKAN)
+nextBtn.addEventListener('click', () => {
     showPage('page-3');
     renderFinal();
-};
+});
 
 function renderFinal() {
     canvas.width = 800;
@@ -114,7 +137,7 @@ function renderFinal() {
     });
 }
 
-// TEXT & STICKER FUNCTIONS
+// TEXT & STICKERS
 function addSticker(emoji) {
     stickers.push({ type: 'emoji', content: emoji, x: 400, y: 300, size: 80 });
     renderFinal();
@@ -133,13 +156,8 @@ function addText() {
     };
 
     stickers.push({
-        type: 'text',
-        content: input.value.toUpperCase(),
-        font: fontMap[fontValue],
-        x: 400,
-        y: 400
+        type: 'text', content: input.value.toUpperCase(), font: fontMap[fontValue], x: 400, y: 400
     });
-
     input.value = '';
     renderFinal();
 }
@@ -150,22 +168,17 @@ function clearOrnaments() {
 }
 
 function drawOrnaments() {
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.fillStyle = "#333331";
-
+    ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillStyle = "#333331";
     stickers.forEach(s => {
         if (s.type === 'text') {
-            ctx.font = s.font;
-            ctx.fillText(s.content, s.x, s.y);
+            ctx.font = s.font; ctx.fillText(s.content, s.x, s.y);
         } else {
-            ctx.font = `${s.size}px serif`;
-            ctx.fillText(s.content, s.x, s.y);
+            ctx.font = `${s.size}px serif`; ctx.fillText(s.content, s.x, s.y);
         }
     });
 }
 
-// DRAG LOGIC
+// DRAG LOGIC (Pointer Pos & Events)
 function getPointerPos(e) {
     const rect = canvas.getBoundingClientRect();
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
@@ -180,11 +193,9 @@ const handleStart = (e) => {
     const pos = getPointerPos(e);
     for (let i = stickers.length - 1; i >= 0; i--) {
         const s = stickers[i];
-        const hitArea = s.type === 'text' ? 120 : 60; // Larger area for text
+        const hitArea = s.type === 'text' ? 120 : 60;
         if (Math.hypot(s.x - pos.x, s.y - pos.y) < hitArea) {
-            selectedStickerIndex = i;
-            isDragging = true;
-            // Bring to front
+            selectedStickerIndex = i; isDragging = true;
             const picked = stickers.splice(i, 1)[0];
             stickers.push(picked);
             selectedStickerIndex = stickers.length - 1;
@@ -199,7 +210,7 @@ const handleMove = (e) => {
         const pos = getPointerPos(e);
         stickers[selectedStickerIndex].x = pos.x;
         stickers[selectedStickerIndex].y = pos.y;
-        renderFinal(); // Direct render for smoother feel
+        renderFinal();
     }
 };
 

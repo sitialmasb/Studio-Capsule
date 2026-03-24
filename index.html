@@ -6,8 +6,17 @@
     <title>STUDIO CAPSULE | Digital Photobooth</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
+    <script>
+        if (localStorage.getItem('studio_session') !== 'active') {
+            window.location.replace('login.html');
+        }
+    </script>
 </head>
 <body class="bg-[#F4F4F2] text-[#333331] overflow-x-hidden">
+
+    <nav class="absolute top-6 right-6 z-50">
+        <button onclick="logout()" class="text-[9px] font-bold tracking-[0.2em] text-[#888880] hover:text-red-500 uppercase transition-colors">Logout</button>
+    </nav>
 
     <section id="page-1" class="min-h-screen flex flex-col items-center justify-center p-6 text-center">
         <div class="mb-16">
@@ -72,7 +81,10 @@
             <div class="w-full lg:w-72">
                 <h3 class="text-center font-bold text-[10px] mb-6 uppercase tracking-[0.2em] text-[#333331]">Pose Review</h3>
                 <div id="pose-slots" class="grid grid-cols-2 lg:grid-cols-1 gap-4"></div>
-                <button id="next-to-edit" class="hidden w-full mt-8 bg-[#333331] text-white py-4 rounded-lg text-[10px] font-bold uppercase tracking-[0.2em] shadow-lg">Proceed to Edit</button>
+                
+                <button id="next-to-edit" class="hidden w-full mt-8 bg-[#333331] text-white py-4 rounded-lg text-[10px] font-bold uppercase tracking-[0.2em] shadow-lg cursor-pointer hover:bg-black transition-colors">
+                    Proceed to Edit
+                </button>
             </div>
         </div>
     </section>
@@ -123,5 +135,11 @@
     </section>
 
     <script src="script.js"></script>
+    <script>
+        function logout() {
+            localStorage.removeItem('studio_session');
+            window.location.replace('login.html');
+        }
+    </script>
 </body>
 </html>
