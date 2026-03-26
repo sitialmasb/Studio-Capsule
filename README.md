@@ -1,6 +1,6 @@
 # 📸 STUDIO CAPSULE | Digital Photobooth
 
-A minimalist web-based digital photobooth built with **HTML, Tailwind CSS, and Vanilla JavaScript**.
+A minimalist web-based digital photobooth built with **HTML, CSS, and JavaScript**.
 
 Users can capture multiple poses, customize their photostrip with text and stickers, and download the final image.
 
