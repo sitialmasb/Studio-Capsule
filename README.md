@@ -28,5 +28,4 @@ Users can capture multiple poses, customize their photostrip with text and stick
 
 ---
 
-Developed by **Siti Almas Bahirah**
-Software Engineering Student ✨
+Developed by Software Engineering Student ✨
